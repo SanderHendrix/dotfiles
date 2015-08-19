@@ -245,3 +245,4 @@ mode "$mode_HDMI" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+bindsym $Alt+Shift+d mode "$mode_screens"
