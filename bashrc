@@ -6,8 +6,8 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-alias la='ls -alh'
-alias ll='ls -lh'
+alias la='ls -hal'
+alias ll='ls -hl'
 alias please='sudo $(history -p !!)'
 alias ffs='eval "sudo $(fc -ln -1)"'
 alias test='eval "sudo cat /sys/kernel/debug/vgaswitcheroo/switch"'
