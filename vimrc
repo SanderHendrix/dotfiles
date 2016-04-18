@@ -1,8 +1,25 @@
 syntax on
 filetype plugin indent on
-set number
+set number 
 set colorcolumn=80
+
+set wildmenu            " visual autocomplete for cmd menu
+set lazyredraw          " redraw only when needed
+
+" Backspace
 set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+
+" Searching
+set ignorecase
+set incsearch           " search whilst entering
+set hlsearch            " highlight matches
+
+" Folding
+set foldenable          " enable folding
+set foldlevelstart=10   " open most by default
+set foldnestmax=10      " 10 nested fold max
+set foldmethod=ident    " fold based on indent level
 
 " Managing those pesky tabs and spaces
 " Standard tab equals four spaces
