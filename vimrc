@@ -19,7 +19,7 @@ set hlsearch            " highlight matches
 set foldenable          " enable folding
 set foldlevelstart=10   " open most by default
 set foldnestmax=10      " 10 nested fold max
-set foldmethod=ident    " fold based on indent level
+set foldmethod=indent   " fold based on indent level
 
 " Managing those pesky tabs and spaces
 " Standard tab equals four spaces
