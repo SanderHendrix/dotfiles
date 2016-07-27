@@ -181,6 +181,10 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# DESKTOP
+#bindsym XF86Calculator
+
+# LAPTOP
 # Keybinds for fn + function key
 # Screen brightness
 bindsym XF86MonBrightnessDown	exec xbacklight -dec 10                    #F2
@@ -233,10 +237,11 @@ bar {
     }
 }
 
-# Default workspaces on startx
-#exec --no-startup-id i3-msg workspace 1; exec i3-sensible-terminal
-#exec --no-startup-id i3-msg workspace 1; exec xterm
-#exec --no-startup-id i3-msg workspace 2; exec firefox
+# Workspace assignments
+assign [class="Firefox"] $WS2
+
+# Autostart
+exec Firefox
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (p) shutdown
 mode "$mode_system" {
