@@ -5,7 +5,13 @@
 ! Source: https://github.com/morhetz/gruvbox-generalized
 ! Last Modified: 6 Sep 2014
 ! -----------------------------------------------------------------------------
-
+Xft.lcdfilter: lcddefault
+Xft.antialias: true
+Xft.autohint: 0
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.dpi: 96
 ! rofi
 rofi.modi: run
 rofi.font: Hack 15
@@ -25,6 +31,17 @@ rofi.fuzzy: false
 rofi.separator-style: solid
 rofi.hide-scrollbar: true
 rofi.auto-select: false
+
+*VT100.colorBDMode:     true
+*VT100.colorBD:         orange
+*VT100.colorULMode:     true
+*VT100.colorUL:         cyan
+
+*VT100.veryBoldColors: 6
+
+xterm*termName: xterm-256color
+!xterm*faceName: Inconsolata:size=10:antialias=false
+!xterm*font: 7x13
 
 ! hard contrast: *background: #1d2021
 *background: #282828
@@ -54,3 +71,4 @@ rofi.auto-select: false
 ! LightGrey + White
 *color7:  #a89984
 *color15: #ebdbb2
+
