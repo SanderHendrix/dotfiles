@@ -24,8 +24,7 @@
 #
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
-command=/usr/libexec/i3blocks/$BLOCK_NAME
-#command=/usr/lib/i3blocks/$BLOCK_NAME
+command=/usr/lib/i3blocks/$BLOCK_NAME
 markup=none
 separator=true
 separator_block_width=10
@@ -36,14 +35,14 @@ border_right=0
 border_bottom=4
 #border=#282828
 
-[window title]
-command=echo "<span>$(xdotool getactivewindow getwindowname)</span>"
-markup=pango
-interval=3
-color=#3ec2ff
-min_width=900
-align=center
-border=#00000000
+# [window title]
+# command=echo "<span>$(xdotool getactivewindow getwindowname)</span>"
+# markup=pango
+# interval=3
+# color=#3ec2ff
+# min_width=900
+# align=center
+# border=#00000000
 
 [mic]
 command=~/.config/i3blocks/blocklets/$BLOCK_NAME

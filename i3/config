@@ -109,19 +109,28 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
-#workspace 1 output LVDS1
-#workspace 2 output LVDS1
-#workspace 3 output HDMI1
-
+# "#:" gets stripped, pango is used for markup
 set $WS1 "1:<span font='12'></span>"
 set $WS2 "2:<span font='12'></span>"
 set $WS3 "3:<span font='12'></span>"
-set $WS4 "4:<span font='12'></span>"
+set $WS4 "4:<span font='12'></span>"
 set $WS5 "5:<span font='12'></span>"
 set $WS6 "6:<span font='12'></span>"
 set $WS7 "7:<span font='12'></span>"
 set $WS8 "8:<span font='12'></span>"
 set $WS9 "9:<span font='12'></span>"
+set $WS10 "10:"
+
+#workspace $WS1 output LVDS1
+#workspace $WS2 output LVDS1
+#workspace $WS3 output HDMI1
+#workspace $WS4 output HDMI1
+#workspace $WS5 output HDMI1
+#workspace $WS6 output HDMI1
+#workspace $WS7 output HDMI1
+#workspace $WS8 output HDMI1
+#workspace $WS9 output HDMI1
+#workspace $WS10 output HDMI1
 
 # switch to workspace
 bindsym $mod+1 workspace $WS1
@@ -133,9 +142,8 @@ bindsym $mod+6 workspace $WS6
 bindsym $mod+7 workspace $WS7
 bindsym $mod+8 workspace $WS8
 bindsym $mod+9 workspace $WS9
-#bindsym $mod+0 $WS10
+bindsym $mod+0 workspace $WS10
 
-workspace $WS5 output HDMI1
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $WS1
@@ -295,11 +303,13 @@ assign [class="Steam"] $WS3
 
 # Autostart
 exec firefox
+exec i3-sensible-terminal
+exec caffeine
 
 # https://github.com/ValveSoftware/steam-for-linux/issues/1040
 #for_window [class="^Steam$" title="^Friends$"] floating enable
 for_window [class="^Steam$" title="^Friends$"] resize shrink width 10000px; resize grow width 300px
-for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title="Steam - News*"] floating enable
 for_window [class="^Steam$" title=".* - Chat"] floating enable
 for_window [class="^Steam$" title="^Settings$"] floating enable
 for_window [class="^Steam$" title=".* - event started"] floating enable
