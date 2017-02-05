@@ -22,6 +22,10 @@ alias ffs='eval "sudo $(fc -ln -1)"'
 # Forcing the use of ~/.config and ~/.cache
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
+# GNUPG
+export GNUPGHOME="$XDG_CONFIG_HOME"/gnupg
+# Less
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 # GTK 2
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 # Nvidia & CUDA
@@ -35,4 +39,7 @@ export VIMPERATOR_INIT=":source $VIMPERATOR_RUNTIME/vimperatorrc"
 
 # Prompt
 #PS1='[\u@\h \W]\$ '
-PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+
+COLOR="$(tput setaf 1)"                                                         
+RESET="$(tput sgr0)"
+PS1='[\u@${SSH_CLIENT+${COLOR}ssh${RESET}:}\h \W$(__git_ps1 " (%s)")]\$ '
