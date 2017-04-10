@@ -36,9 +36,15 @@ export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 # Vimperator
 export VIMPERATOR_RUNTIME="$XDG_CONFIG_HOME/vimperator"
 export VIMPERATOR_INIT=":source $VIMPERATOR_RUNTIME/vimperatorrc"
+# Python
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
 
 # Prompt
 #PS1='[\u@\h \W]\$ '
+
+if [ $TERMINIX_ID ] || [ $VTE_VERSION ]; then
+    source /etc/profile.d/vte.sh
+fi
 
 COLOR="$(tput setaf 1)"                                                         
 RESET="$(tput sgr0)"

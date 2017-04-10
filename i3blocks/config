@@ -34,6 +34,7 @@ border_left=0
 border_right=0
 border_bottom=4
 #border=#282828
+color=#ffffffaa
 
 # [window title]
 # command=echo "<span>$(xdotool getactivewindow getwindowname)</span>"
@@ -57,24 +58,18 @@ label=
 instance=Master
 interval=once
 signal=10
-border=#263238
-
-[volume]
-label= 
-instance=Front
-interval=once
-signal=10
+#border=#263238
 
 # Memory usage
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=MEM
+label=RAM
 separator=false
 interval=30
 
 [memory]
-label=SWAP
+label=Swap
 instance=swap
 separator=false
 interval=30
@@ -85,12 +80,13 @@ interval=30
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label=HOME
+label=
 #instance=/mnt/data
 interval=30
 
 # Network interface monitoring
 [ethernet]
+label=
 command=dig +short myip.opendns.com @resolver1.opendns.com
 interval=once
 
@@ -105,17 +101,40 @@ interval=once
 [cpu_usage]
 label=CPU
 interval=10
-min_width=CPU: 100.00%
+align=right
+min_width=CPU 99.00%
+#min_width=CPU: 100.00%
 #separator=false
+
+# Temperature
+#
+# Support multiple chips, though lm-sensors.
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[temperature]
+command=$HOME/.local/share/i3blocks-contrib/temperature/temperature
+interval=10
 
 #[load_average]
 #interval=10
 
+# GPU stats 
+[gpu]
+label=
+command=nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader
+interval=10
+
 # Date Time
 #
 [time]
-command=date '+%Y-%m-%d %H:%M:%S'
+label=
+command=date '+%Y-%m-%d' 
 interval=5
+
+[time]
+label=
+command=date '+%H:%M:%S'
+interval=1
 
 # Generic media player support
 #
@@ -131,12 +150,3 @@ interval=5
 # Support multiple VPN, with colors.
 #[openvpn]
 #interval=20
-
-# Temperature
-#
-# Support multiple chips, though lm-sensors.
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
-#[temperature]
-#label=TEMP
-#interval=10

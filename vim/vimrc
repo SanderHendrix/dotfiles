@@ -60,3 +60,10 @@ function ToggleTab()
         set expandtab
     endif
 endfunction
+
+" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+call plug#begin('~/.local/share/vim/plugged')
+" Rust
+Plug 'rust-lang/rust.vim'
+
+call plug#end()

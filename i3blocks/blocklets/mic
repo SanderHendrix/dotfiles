@@ -1,7 +1,7 @@
 # Check mouse event
 case $BLOCK_BUTTON in
     3)
-    pactl set-source-mute 2 toggle;  # PulseAudio
+    pactl set-source-mute 1 toggle;  # PulseAudio
 esac
 
 # Get state of mic: does not work if any of the monitors is muted
@@ -10,16 +10,16 @@ pactl list sources | grep -q "Mute: yes" && [[ $? -eq 0 ]] && state="off";  # If
 # Toggle mic's state
 case $state in
     off)
-    echo "  " " muted ";
-    #echo "  "
+    #echo "  " " muted ";
+    echo "  "
     echo
     echo \#005FD7;  # Soft blue
     #echo \#00FF00;  # Bright green
     exit 0;
     ;;
     *)
-    echo "     " " OPEN   ";
-    #echo "      ";
+    #echo "  " " OPEN ";
+    echo "  ";
     exit 33;
     ;;
 esac

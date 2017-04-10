@@ -255,30 +255,31 @@ set $magenta #d3869b
 # set_from_resource $white color15
 # 
 #                       BORDER          BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
-client.focused          $darkmagenta     $black     $darkgreen  $darkblue       $darkblue
-client.unfocused        $black           $black     $black      $black          $black
-client.focused_inactive $black           $black     $black      $black          $black
-client.urgent           $darkred         $darkred   $black      $darkred    $darkred
+client.focused          $darkmagenta    $black      $darkgreen  $darkblue   $darkblue
+client.unfocused        $black          $black      $black      $black      $black
+client.focused_inactive $black          $black      $black      $black      $black
+client.urgent           $darkred        $darkred    $black      $darkred    $darkred
 client.background       $black
 
 # Pressing the same workspace key returns you to the previous one.
 workspace_auto_back_and_forth	yes
 
 #set $bg #282828
-set $bg #00000000
+set $bg #000000bb
+
 #Start i3bar to display a workspace bar (plus the system information i3status
 #finds out, if available)
 bar {
     i3bar_command i3bar -t
     status_command i3blocks
-    height 30
-    #tray_output none
-    tray_padding 0
-    separator_symbol "-"
 #    status_command i3status
 #    status_command conky -c $HOME/.config/i3/conky/conkyrc
-#    font pango:Noto Sans 10
-    font pango:Fixed, FontAwesome 8
+    height 30
+    #tray_output none
+    tray_padding 2
+    separator_symbol " "
+    font pango:Noto Sans, FontAwesome Bold 10
+#    font pango:Misc Fixed, FontAwesome 8
     mode dock
     position top
     strip_workspace_numbers yes
@@ -298,8 +299,17 @@ bar {
 }
 
 # Workspace assignments
-assign [class="Firefox"] $WS2
-assign [class="Steam"] $WS3
+assign [class="Firefox"]        $WS2
+
+assign [class="Steam"]          $WS3
+
+assign [class="^Minecraft*"]    $WS4
+assign [class="Civ6"]           $WS4
+assign [class="insurgency_linux"] $WS4
+
+assign [class="Mumble"]         $WS8
+assign [class="TeamSpeak 3"]    $WS8
+
 
 # Autostart
 exec firefox
@@ -308,11 +318,11 @@ exec caffeine
 
 # https://github.com/ValveSoftware/steam-for-linux/issues/1040
 #for_window [class="^Steam$" title="^Friends$"] floating enable
-for_window [class="^Steam$" title="^Friends$"] resize shrink width 10000px; resize grow width 300px
+#for_window [class="^Steam$" title="^Friends$"] resize shrink width 10000px; resize grow width 300px
 for_window [class="^Steam$" title="Steam - News*"] floating enable
-for_window [class="^Steam$" title=".* - Chat"] floating enable
+#for_window [class="^Steam$" title=".* - Chat"] floating enable
 for_window [class="^Steam$" title="^Settings$"] floating enable
-for_window [class="^Steam$" title=".* - event started"] floating enable
+#for_window [class="^Steam$" title=".* - event started"] floating enable
 for_window [class="^Steam$" title=".* CD key"] floating enable
 for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
 for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
