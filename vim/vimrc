@@ -1,5 +1,6 @@
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
-set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+set runtimepath=$XDG_CONFIG_HOME/vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$XDG_CONFIG_HOME/vim/after
+let g:netrw_home=$XDG_CACHE_HOME.'/vim'
 syntax on
 filetype plugin indent on
 set colorcolumn=80
@@ -7,12 +8,12 @@ set colorcolumn=80
 set wildmenu            " visual autocomplete for cmd menu
 set lazyredraw          " redraw only when needed
 
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
+" inoremap " ""<left>
+" inoremap ' ''<left>
+" inoremap ( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+" inoremap {<CR> {<CR>}<ESC>O
 
 " Line numbering
 set number
@@ -36,6 +37,15 @@ set ignorecase
 set incsearch           " search whilst entering
 set hlsearch            " highlight matches
 
+" Splits
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+nnoremap <C-H> <C-W>h
+
+set splitbelow
+set splitright
+
 " Folding
 set foldenable          " enable folding
 set foldlevelstart=10   " open most by default
@@ -44,26 +54,92 @@ set foldmethod=indent   " fold based on indent level
 
 " Managing those pesky tabs and spaces
 " Standard tab equals four spaces
-set shiftwidth=4
-set softtabstop=4
-set expandtab
+set tabstop=4       " Tab is DISPLAYED as # of columns
+set shiftwidth=0    " 0  = Follow tabstop
+set softtabstop=-1  " -1 = Follow shiftwidth
+set expandtab       " Replace tab with spaces
+" Set so tabstop dictates the amount of spaces inserted. If different amount
+" required, change with :set ts=#.
+" If tabs are wanted, change with :set noet (noexpandtab) and change visual
+" like normal with :set ts=#.
+
+" Corrections:
+" Makefiles need Tabs
+autocmd FileType make setlocal noexpandtab
+" YAML-files work better with two spaces
+autocmd FileType yaml setlocal ts=2
+
 " Toggle between tab being 4 spaces (Python ed)
 " and an actual tab of eight columns (Linux kernel style)
 function ToggleTab()
     if &expandtab
-        set shiftwidth=8
-        set softtabstop=0
+        set tabstop=8
         set noexpandtab
     else
-        set shiftwidth=4
-        set softtabstop=4
+        set tabstop=4
         set expandtab
     endif
 endfunction
 
-" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
-call plug#begin('~/.local/share/vim/plugged')
-" Rust
-Plug 'rust-lang/rust.vim'
+function WhiteSpace()
+    :%substitute/\s\+$//gc
+endfunction
 
-call plug#end()
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
+
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
+
+if executable('css-languageserver')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'css-languageserver',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+        \ 'whitelist': ['css', 'less', 'sass', 'scss'],
+        \ })
+endif
+
+" let g:lsp_signs_enabled = 1         " enable signs
+" let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+"
+" let g:lsp_signs_error = {'text': '✗'}
+" let g:lsp_signs_warning = {'text': '‼', 'icon': '/path/to/some/icon'} " icons require GUI
+" let g:lsp_signs_hint = {'icon': '/path/to/some/other/icon'} " icons require GUI
+"
+" let g:ale_linters_explicit = 1
+" let g:ale_linters = {
+" \   'javascript': ['eslint'],
+" \}
+
+try
+    " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+    call plug#begin('~/.local/share/vim/plugged')
+    " (), [], {} automation
+    Plug 'jiangmiao/auto-pairs'
+    " Rust
+    Plug 'rust-lang/rust.vim'
+    " Kotlin
+    Plug 'udalov/kotlin-vim'
+    " Supertab
+    Plug 'ervandew/supertab'
+    " ALE
+    Plug 'w0rp/ale'
+    " LSP
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/vim-lsp'
+    " Auto complete
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    call plug#end()
+catch
+endtry
